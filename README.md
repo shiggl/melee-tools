@@ -10,7 +10,8 @@ This tutorial focuses on the model-editing portion of creating a skin, ignoring 
 Below are programs and resources that are essential to creating a skin for Melee.
 #### Necessary Software
 * [**Blender**](https://www.blender.org/download/lts/3-3/)[^1] - An open source, free-to-use 3D modelling program, and the program used to manipulate and change the desired 3D models.
-  * [**Blender Source Tools**](http://steamreview.org/BlenderSourceTools/) - A Blender addon necessary for importing and exporting `.smd` files.
+  * [**Blender Source Tools**](http://steamreview.org/BlenderSourceTools/) - A Blender add-on necessary for importing and exporting `.smd` files.
+  * **Material Utilities** - A built-in Blender add-on available in the _Preferences_ menu that is helpful in dealing with materials in Blender. Search for it in the _Add-ons_ tab and enable it to use it.
   * Installing Blender addons is a simple process. [Click here](https://docs.blender.org/manual/en/latest/editors/preferences/addons.html#installing-add-ons) to read on how to do it, or look up [a Youtube video](https://youtu.be/vYh1qh9y1MI), there's plenty available.
 * [**HSDRaw**](https://github.com/Ploaj/HSDLib/releases) - Created by Ploaj, HSDRaw is the second essential workspace for skin creation, allowing users to manipulate `.dat` files in many ways: importing and exporting models, changing textures, even change in-game characteristics.
   *  For this tutorial, it will primarily be used to export character armatures/skeletons, and import custom models to work in-game.
@@ -31,7 +32,7 @@ There will be no distribution of copyrighted material in this tutorial (i.e. `.d
 
 ---
 
-### Step 1 – Exporting Model (and Skeleton) from Melee to Blender
+### Step 1 – Exporting Model (and Skeleton) from Melee w/ HSDRaw
 In this tutorial, I will be making an _Animelee_ style skin, but the steps are largely the same for both types of skins.
 #### Acquiring the Character's `.dat` File and Textures
 1. Open DTW (_DAT Texture Wizard_) and import your Melee ISO by going `File > Open Disc (ISO/GCM)` from the menu at the top of the window
@@ -56,8 +57,33 @@ In this tutorial, I will be making an _Animelee_ style skin, but the steps are l
 <details> <summary> Click Here for a Video Demonstration</summary
 <div align="center"><video src="https://user-images.githubusercontent.com/127040488/222988721-ba468a01-eb54-4806-ae16-c1fc4ef20abd.mp4"/></div></details>
 
+### Step 2 – Importing and Preparing the Model in Blender
+**Be sure to have installed the _Blender Source Tools_ addon [mentioned above](https://github.com/shiggl/melee-tools#necessary-software).** It's necessary to get a working skeleton.
+#### Importing the `.dae` and `.smd` files
+Put plainly, we'll be using the `.dae` for the meshes/textures, and the `.smd` for the skeleton/vertex weights[^3].
+##### Importing and preparing the `.dae` file for use
+1. `File > Import > Collada (.dae)` then navigate to the `.dae` file you just created with HSDRaw
+    * In the Blender viewport, you can hold the `Z` key and mouse over _Material Preview_ to see the assigned material
+      *  Some of the textures may look wrong or mirrored in strange ways. **Don't fret, they're _fine_.** A lot of Melee's textures are mirrored and scaled in-game to look correct. This can be configured in HSDRaw's texture settings.
+2.  Select the _Armature_ created by the `.dae` file and delete it. We won't be needing it for this tutorial.
+3.  Create a collection in the scene browser and name it what ever you'd like. I named mine _dae_ for this project. Drag all the newly created objects into that collection
+<details> <summary> Click Here for a Video Demonstration</summary
+<div align="center"><video src="https://user-images.githubusercontent.com/127040488/222990531-9a1665a9-f895-4040-9c4c-9b9d405a1d30.mp4"/></div></details>
+
+##### Importing and preparing the `.smd` file for use
+1. `File > Import > Source Engine (.smd, .vta, .dmx, .qc)` then navigate to the `.smd` file you just created with HSDRaw
+2. Blender will create a collection automatically. It contains a single object that consists of all the character's models and textures together. This will be used to transfer vertex weights later in the tutorial.
+    * If you have the _Material Utilities_ add-on installed, in the viewport, select the object and hit `Shift+Q` to bring up the add-on menu and clear out all active materials. This step isn't strictly necessary, but it helps lessen confusion between the separated `.dae` meshes and the `.smd` base.
+3. In the scene browser, click the dropdown on _char_skeleton_, then again next to the green man. 
+4. Go into _Edit Mode_ 
+    * (`Tab` key in the viewport to easily switch between _Edit Mode_ and _Object Mode_)
+6. Select all the non-"JOBJ_#" bones (their names should be something like _Joint_0_Object_0_) in the browser to the side and delete them.
+    * These are the junk bones and will create errors if they're left in the skeleton. This step is essential to having the mod work in game.
+
+
 ---
 [^1]: I've linked Blender's LTS (Long Term Support) branch for its stability, but feel free to use the [latest available version](https://www.blender.org/download/).
 [^2]: It's a good practice to save the .dat and texture files together in their own labelled folder, and it's recommended to keep an unedited copy of your .dat and texture folder as a backup
+[^3]: By default, the imported `.dae` already comes broken down by material and is thus easier to manipulate and change without creating objects with too many assigned materials. The skeleton found in the `.dae` format is also incomplete and inaccurate and will result in crashes in-game, hence the inclusion of the `.smd` file.
 
 
