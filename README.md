@@ -67,7 +67,7 @@ Put plainly, we'll be using the `.dae` for the meshes/textures, and the `.smd` f
       *  Some of the textures may look wrong or mirrored in strange ways. **Don't fret, they're _fine_.** A lot of Melee's textures are mirrored and scaled in-game to look correct. This can be configured in HSDRaw's texture settings.
 2.  Select the _Armature_ created by the `.dae` file and delete it. We won't be needing it for this tutorial.
 3.  Create a collection in the scene browser and name it what ever you'd like. I named mine _dae_ for this project. Drag all the newly created objects into that collection
-<details> <summary> Click Here for a Video Demonstration</summary
+<details> <summary> Click Here for a Video Demonstration</summary>
 <div align="center"><video src="https://user-images.githubusercontent.com/127040488/222990531-9a1665a9-f895-4040-9c4c-9b9d405a1d30.mp4"/></div></details>
 
 ##### Importing and preparing the `.smd` file for use
@@ -80,10 +80,39 @@ Put plainly, we'll be using the `.dae` for the meshes/textures, and the `.smd` f
 6. Select all the non-"JOBJ_#" bones (their names should be something like _Joint_0_Object_0_) in the browser to the side and delete them.
     * These are the junk bones and will create errors if they're left in the skeleton. This step is essential to having the mod work in game.
 
+<details> <summary> Click Here for a Video Demonstration</summary>
+<div align="center"><video src="https://user-images.githubusercontent.com/127040488/227718677-115623d0-41dd-432b-bbb3-483cf3352c74.mp4"/></div></details>
+
+### Step 3 – Rigging Custom Meshes
+Jigglypuff is a great character for dipping your toes into model edits, as she's a simple character with not a lot of moving parts. Humanoid characters are more tricky, and are higher risk for janky deformations; I'll briefly go over some tips in the clean-up portion of this tutorial on common issues. For the majority of this tutorial though, I'll be making a Slime skin from Dragon Quest over Jigglypuff. 
+
+There are a few roads you can go down, modelling it yourself, importing a ripped game model, or a combination of both.  I'll briefly go over some of the pros and cons for each method.
+
+#### Importing a Ripped Game Model
+* _Saves Time_ - If you're inexperienced, with textures and meshes already created, you don't have to stress over spending time learning how to model.
+* _Unoptimized_ - Lots of models, especially from newer titles, often have polycounts (i.e. how many sides/triangles make up the model) that are outside SSBM's "budget".[^4]
+   *  In addition to this, some models are in a default _A-Pose_ as opposed to _T-Pose_, which might require adjustments to be made on the model itself.
+   *  Oftentimes, game models are constructed _tris_, sides made of 3 vertices, which are typically more difficult to manipulate compared to _quads_.
+* _Good Learning Resource_ - One of the most constructive things to do with ripped game models is to study how they're made. Since you can look at them in Blender, you can try and understand what tools and shapes were used to make the model— improving your own in the process.
+* _Less Control_ - If you don't make the model, you're locked into the original model's topology which doesn't always deform well with Melee's skeletons.
+#### Creating a Model from Scratch
+* _More Intensive_ - If you don't have experience modelling, or have a good workflow, creating your own model can be a lot more time consuming.
+   *  The knowledgebase for creating a full character from scratch can be intimidating, especially when you involve UV unwrapping and texture creation. So I'd recommend starting out with modifying the existing Melee characters or ripped game models, and get comfortable with a workflow. 
+* _More Control_ - Since you're creating the meshes, you get to make every decision, and iterate on a model without much of a headache. This also means you can be more conscious of the Melee skeleton you're skinning over.
+* _Distribution_ - Wholly created by yourself, there's less of a grey area in redistributing your mod, especially if you decide to create a Patreon/monetize in any shape.
+* _Fulfillment_ - More subjective, but 3D modelling is an art and skill, so it's fulfilling to model and texture a character from start to finish.
+
+<details> <summary> Click Here for a Video of Creating the Mesh for Dragon Quest's Slime </summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227730625-e6b21c57-0f14-4807-b7ef-5a8e3d4048ff.mp4"></div></details>
+
+
+
+
+
+
 
 ---
 [^1]: I've linked Blender's LTS (Long Term Support) branch for its stability, but feel free to use the [latest available version](https://www.blender.org/download/).
 [^2]: It's a good practice to save the .dat and texture files together in their own labelled folder, and it's recommended to keep an unedited copy of your .dat and texture folder as a backup
 [^3]: By default, the imported `.dae` already comes broken down by material and is thus easier to manipulate and change without creating objects with too many assigned materials. The skeleton found in the `.dae` format is also incomplete and inaccurate and will result in crashes in-game, hence the inclusion of the `.smd` file.
-
+[^4]: A budget refers to the general ceiling of total polys/tris rendered on screen. Since SSBM is a gamecube game, it's generally best to try and remain relatively low poly, and make up detail in texturing.
 
