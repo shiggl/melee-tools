@@ -1,6 +1,6 @@
 # SSBM Skin Creation Tutorial (For Blender)
 
-**Before we begin, I want to thank [xRunRiot](https://twitter.com/xRunRiot) for compiling a lot of the steps together and publishing them in the Animelee discord. Prior to his effort, a lot of skin modding knowledge was decentralized and incomplete.
+**Before we begin, I want to thank [xRunRiot](https://twitter.com/xRunRiot) for compiling a lot of the steps together and publishing them in the Animelee discord. Prior to his effort, a lot of skin modding knowledge was decentralized and incomplete.**
 
 This tutorial focuses on the model-editing portion of creating a skin, ignoring things like character portraits or stock icons. It isn't fully comprehensive— there are gaps in our collective knowledge, so this tutorial will be a work in progress. With that in mind, let us begin.
 
@@ -120,12 +120,8 @@ Whether you've created your own model, or simply need to apply a texture to an i
   
 <details> <summary> Click Here for a Video Demonstration</summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227736752-282cbebe-df74-4be7-898f-ec5a0fc71a23.mp4"></div></details>
 
-
-
-
-
 ### Step 4B - Basics of Model UVs
-
+**If you are making a mod in the style of Animelee, this step is very important.**
 
 
 ---
