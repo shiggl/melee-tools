@@ -1,8 +1,8 @@
 # SSBM Skin Creation Tutorial (For Blender)
 
-**Before we begin, I want to thank [xRunRiot](https://twitter.com/xRunRiot) for compiling a lot of the steps together and publishing them in the Animelee discord. This page is largely a reflection of that tutorial with a few modifications based on my experience and knowledge.** 
+**Before we begin, I want to thank [xRunRiot](https://twitter.com/xRunRiot) for compiling a lot of the steps together and publishing them in the Animelee discord. Prior to his effort, a lot of skin modding knowledge was decentralized and incomplete.
 
-This tutorial focuses on the model-editing portion of creating a skin, ignoring things like character portraits or stock icons. It isn't fully comprehensive— there are gaps in our collective knowledge, so this tutorial may always be a work in progress. With that in mind, let us begin.
+This tutorial focuses on the model-editing portion of creating a skin, ignoring things like character portraits or stock icons. It isn't fully comprehensive— there are gaps in our collective knowledge, so this tutorial will be a work in progress. With that in mind, let us begin.
 
 ---
 
@@ -83,7 +83,7 @@ Put plainly, we'll be using the `.dae` for the meshes/textures, and the `.smd` f
 <details> <summary> Click Here for a Video Demonstration</summary>
 <div align="center"><video src="https://user-images.githubusercontent.com/127040488/227718677-115623d0-41dd-432b-bbb3-483cf3352c74.mp4"/></div></details>
 
-### Step 3 – Rigging Custom Meshes
+### Step 3 – Custom Meshes
 Jigglypuff is a great character for dipping your toes into model edits, as she's a simple character with not a lot of moving parts. Humanoid characters are more tricky, and are higher risk for janky deformations; I'll briefly go over some tips in the clean-up portion of this tutorial on common issues. For the majority of this tutorial though, I'll be making a Slime skin from Dragon Quest over Jigglypuff. 
 
 There are a few roads you can go down, modelling it yourself, importing a ripped game model, or a combination of both.  I'll briefly go over some of the pros and cons for each method.
@@ -102,11 +102,29 @@ There are a few roads you can go down, modelling it yourself, importing a ripped
 * _Distribution_ - Wholly created by yourself, there's less of a grey area in redistributing your mod, especially if you decide to create a Patreon/monetize in any shape.
 * _Fulfillment_ - More subjective, but 3D modelling is an art and skill, so it's fulfilling to model and texture a character from start to finish.
 
-<details> <summary> Click Here for a Video of Creating the Mesh for Dragon Quest's Slime </summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227730625-e6b21c57-0f14-4807-b7ef-5a8e3d4048ff.mp4"></div></details>
+For this tutorial, I'll be creating the mesh and texture. If you're interested in using ripped models, check out the website, [**The Models Resource**](https://www.models-resource.com/). It's a great compendium of ripped game models uploaded that are easily accessible and well organized.
+
+<details> <summary> Click Here: Creating the Mesh for Dragon Quest's Slime </summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227730625-e6b21c57-0f14-4807-b7ef-5a8e3d4048ff.mp4"></div></details>
+ 
+### Step 4A - Creating Materials and Assigning Textures
+
+Whether you've created your own model, or simply need to apply a texture to an imported model, being able to navigate the materials panel and _Shading_ view are important. In Blender, the textures (i.e. the image file itself) are contained within a _material_ that's assigned to an object.
+ 
+1. Select the mesh object you want to create a texture for.
+2. Navigate to the _Material Properties_ menu in the navigation panel (the little, checkered red ball), and click `+New` to create a new material.
+    * If you have the _Material Utilities_ add-on enabled, `Shift+Q` opens up a menu for quickly creating and assigning textures. It's helpful for quickly assigning materials to multiple objects, if need be.
+3. With the new material created, go to the _Shading_ view, located at the top of the screen. This screen shows the nodes[^5] that comprise the material for the _active object_[^6].
+    * `Shift+A` is a shortcut to open up the _Add_ menu. Once the menu is open, search the word "Image" and add an `Image Texture` node into the material. Drag the yellow _Color_ output on the `Image Texture` node to the receiving _Base Color_ circle on the `Principled BSDF` node.
+4. Click the folder icon on the `Image Texture` node to open the browser, then navigate to and open the texture you require.
+    * It's worth noting that any change made to a material applies across every object that has that material assigned. That means if I change the texture in my _slime_ material, every single object with the _slime_ material will also change texture.
+  
+<details> <summary> Click Here for a Video Demonstration</summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227736752-282cbebe-df74-4be7-898f-ec5a0fc71a23.mp4"></div></details>
 
 
 
 
+
+### Step 4B - Basics of Model UVs
 
 
 
@@ -115,4 +133,6 @@ There are a few roads you can go down, modelling it yourself, importing a ripped
 [^2]: It's a good practice to save the .dat and texture files together in their own labelled folder, and it's recommended to keep an unedited copy of your .dat and texture folder as a backup
 [^3]: By default, the imported `.dae` already comes broken down by material and is thus easier to manipulate and change without creating objects with too many assigned materials. The skeleton found in the `.dae` format is also incomplete and inaccurate and will result in crashes in-game, hence the inclusion of the `.smd` file.
 [^4]: A budget refers to the general ceiling of total polys/tris rendered on screen. Since SSBM is a gamecube game, it's generally best to try and remain relatively low poly, and make up detail in texturing.
+[^5]: Nodes are how shaders and compositing are constructed in Blender. They're pretty intuitive and color coded, for the purpose of this tutorial, there's not any advanced knowledge needed— especially because compatibility when it comes to importing into HSDRaw.
+[^6]: It's important to realize there's a difference between the _active_ object and _selected_ objects. The active object is the most recently (shift) clicked object, indicated by the bright orange outline around the mesh. When selecting multiple objects, actions are typically applied to the active object first and foremost. For example, if you `Shift+LMB` Object B → Object A, Object A will be the active object.
 
