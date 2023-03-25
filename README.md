@@ -119,9 +119,11 @@ Whether you've created your own model, or simply need to apply a texture to an i
     * It's worth noting that any change made to a material applies across every object that has that material assigned. That means if I change the texture in my _slime_ material, every single object with the _slime_ material will also change texture.
   
 <details> <summary> Click Here for a Video Demonstration</summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227736752-282cbebe-df74-4be7-898f-ec5a0fc71a23.mp4"></div></details>
+ 
+Since I'm creating an Animelee style mod, I'm gonna use a "palette blocks" method when it comes to texturing, essentially just placing color blocks and assigning each face of the model to a corresponding color.
 
 ### Step 4B - Basics of Model UVs
-**If you are making a mod in the style of Animelee, this step is very important.**
+**If you are making a mod in the style of Animelee, this step is very important.** This step will be a brief overview on navigating the _UV Editing_ view and 
 
 
 ---
