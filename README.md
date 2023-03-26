@@ -60,7 +60,7 @@ In this tutorial, I will be making an _Animelee_ style skin, but the steps are l
 ### Step 2 – Importing and Preparing the Model in Blender
 **Be sure to have installed the _Blender Source Tools_ addon [mentioned above](https://github.com/shiggl/melee-tools#necessary-software).** It's necessary to get a working skeleton.
 #### Importing the `.dae` and `.smd` files
-Put plainly, we'll be using the `.dae` for the meshes/textures, and the `.smd` for the skeleton/vertex weights[^3].
+Put plainly, we'll be using the `.dae` for the meshes/textures (if your mod is using the character model), and the `.smd` for the skeleton/vertex weights.[^3].
 ##### Importing and preparing the `.dae` file for use
 1. `File > Import > Collada (.dae)` then navigate to the `.dae` file you just created with HSDRaw
     * In the Blender viewport, you can hold the `Z` key and mouse over _Material Preview_ to see the assigned material
@@ -106,7 +106,7 @@ For this tutorial, I'll be creating the mesh and texture. If you're interested i
 
 <details> <summary> Click Here: Creating the Mesh for Dragon Quest's Slime </summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227730625-e6b21c57-0f14-4807-b7ef-5a8e3d4048ff.mp4"></div></details>
  
-### Step 4A - Creating Materials and Assigning Textures
+### Step 4 - Creating Materials and Assigning Textures
 
 Whether you've created your own model, or simply need to apply a texture to an imported model, being able to navigate the materials panel and _Shading_ view are important. In Blender, the textures (i.e. the image file itself) are contained within a _material_ that's assigned to an object.
  
@@ -120,11 +120,25 @@ Whether you've created your own model, or simply need to apply a texture to an i
   
 <details> <summary> Click Here for a Video Demonstration</summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227736752-282cbebe-df74-4be7-898f-ec5a0fc71a23.mp4"></div></details>
  
-Since I'm creating an Animelee style mod, I'm gonna use a "palette blocks" method when it comes to texturing, essentially just placing color blocks and assigning each face of the model to a corresponding color.
+Since I'm creating an Animelee style mod, I'm going to use a "palette blocks" method when it comes to texturing, essentially just placing color blocks and assigning each face of the model to a corresponding color instead of a traditional texturing method. See below for what the texture looks like.
 
-### Step 4B - Basics of Model UVs
-**If you are making a mod in the style of Animelee, this step is very important.** This step will be a brief overview on navigating the _UV Editing_ view and 
+![palette](https://user-images.githubusercontent.com/127040488/227795931-e4169fd6-2817-4eb3-9cbd-3e69083d5960.png)
+ 
+#### UV Mapping (for Animelee)
 
+![santa-uv](https://user-images.githubusercontent.com/127040488/227798630-dd55a79d-84fa-4a93-af08-4b95eec046a5.png)
+
+UVs are essentially a set of digital instructions on how to wrap a texture around a 3D model, much like a candy wrapper around a chocolate. UV Mapping is the process of laying out the "instructions"/coordinates that a model follows. It can be really complicated in general— beyond the scope of this tutorial, and since Animelee models are textured entirely within solid colors, we only need to point each polygon to the correct color.
+
+1. With your material created and assigned to the relevant objects, navigate to the _UV Editing_ view at the top of the window. 
+2. Select the object with the UVs you'd like to modify and go into _Edit Mode_ (`Tab` is the shortcut for switching to _Edit Mode_).
+3. In _Edit Mode_, you can switch between vertex selection, line selection, and face selection (`1`, `2`, or `3` on the keyboard respectively, or the icons on the top bar). For this tutorial I'll primarily use face selection (`3`).
+    *   The `A` key is a shortcut to select every _visible_ face in _Edit Mode_. `H` is the shortcut for hiding selected faces, `Alt+H` unhides all faces, and `Shift+H` hides every face _except_ for those you have selected.
+        *   There are many ways to speed up face selection, so feel free to look around the _Select_ dropdown menu in _Edit Mode_ and experiment a little.
+4. With a face selected, you should see a "UV" appear in the left panel of the screen, over the selected texture. It should resemble the shape of the selected faces, but since we're assigning it a color on our palette, it doesn't need a shape. 
+    *   You may have to select the UVs that appear in a similar fashion to how you would select something in _Edit Mode_. 
+    *   Once selected, `M` → _At Center_, snaps all corners of the selected UV into a single spot, guarenteeing  a solid color when moved over a palette square.
+5. Repeat for all the faces of the model to their desired color square, until your model is fully "textured".
 
 ---
 [^1]: I've linked Blender's LTS (Long Term Support) branch for its stability, but feel free to use the [latest available version](https://www.blender.org/download/).
