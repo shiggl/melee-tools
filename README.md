@@ -63,8 +63,8 @@ In this tutorial, I will be making an _Animelee_ style skin, but the steps are l
 Put plainly, we'll be using the `.dae` for the meshes/textures (if your mod is using the character model), and the `.smd` for the skeleton/vertex weights.[^3].
 ##### Importing and preparing the `.dae` file for use
 1. `File > Import > Collada (.dae)` then navigate to the `.dae` file you just created with HSDRaw
-    * In the Blender viewport, you can hold the `Z` key and mouse over _Material Preview_ to see the assigned material
-      *  Some of the textures may look wrong or mirrored in strange ways. **Don't fret, they're _fine_.** A lot of Melee's textures are mirrored and scaled in-game to look correct. This can be configured in HSDRaw's texture settings.
+    * In the Blender viewport, you can hold the `Z` key and mouse over _Material Preview_ to see the assigned material.
+      *  Some of the textures may look wrong or mirrored in strange ways. **Don't fret, they're _fine_.** A lot of Melee's textures are mirrored and scaled in-game to look correct. Thhose can be configured in HSDRaw's texture settings.
 2.  Select the _Armature_ created by the `.dae` file and delete it. We won't be needing it for this tutorial.
 3.  Create a collection in the scene browser and name it what ever you'd like. I named mine _dae_ for this project. Drag all the newly created objects into that collection
 <details> <summary> Click Here for a Video Demonstration</summary>
@@ -83,7 +83,7 @@ Put plainly, we'll be using the `.dae` for the meshes/textures (if your mod is u
 <details> <summary> Click Here for a Video Demonstration</summary>
 <div align="center"><video src="https://user-images.githubusercontent.com/127040488/227718677-115623d0-41dd-432b-bbb3-483cf3352c74.mp4"/></div></details>
 
-### Step 3 – Custom Meshes
+### Step 3 — Custom Meshes
 Jigglypuff is a great character for dipping your toes into model edits, as she's a simple character with not a lot of moving parts. Humanoid characters are more tricky, and are higher risk for janky deformations; I'll briefly go over some tips in the clean-up portion of this tutorial on common issues. For the majority of this tutorial though, I'll be making a Slime skin from Dragon Quest over Jigglypuff. 
 
 There are a few roads you can go down, modelling it yourself, importing a ripped game model, or a combination of both.  I'll briefly go over some of the pros and cons for each method.
@@ -106,7 +106,7 @@ For this tutorial, I'll be creating the mesh and texture. If you're interested i
 
 <details> <summary> Click Here: Creating the Mesh for Dragon Quest's Slime </summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227730625-e6b21c57-0f14-4807-b7ef-5a8e3d4048ff.mp4"></div></details>
  
-### Step 4 - Creating Materials and Assigning Textures
+### Step 4 — Creating Materials and Assigning Textures
 
 Whether you've created your own model, or simply need to apply a texture to an imported model, being able to navigate the materials panel and _Shading_ view are important. In Blender, the textures (i.e. the image file itself) are contained within a _material_ that's assigned to an object.
  
@@ -124,6 +124,8 @@ Since I'm creating an Animelee style mod, I'm going to use a "palette blocks" me
 
 ![palette](https://user-images.githubusercontent.com/127040488/227795931-e4169fd6-2817-4eb3-9cbd-3e69083d5960.png)
  
+Luckily, creating these textures is simple, just create a texture with a resolution that's a base two resolution (e.g. 64x64 px, 128x64 px, 256x256 px, etc.) with a base color and a color for any shading or highlights. Personally, I also typically include a solid black palette for the Animelee outline.
+ 
 #### UV Mapping (for Animelee)
 
 ![santa-uv](https://user-images.githubusercontent.com/127040488/227798630-dd55a79d-84fa-4a93-af08-4b95eec046a5.png)
@@ -137,10 +139,38 @@ UVs are essentially a set of digital instructions on how to wrap a texture aroun
         *   There are many ways to speed up face selection, so feel free to look around the _Select_ dropdown menu in _Edit Mode_ and experiment a little.
 4. With a face selected, you should see a "UV" appear in the left panel of the screen, over the selected texture. It should resemble the shape of the selected faces, but since we're assigning it a color on our palette, it doesn't need a shape. 
     *   You may have to select the UVs that appear in a similar fashion to how you would select something in _Edit Mode_. 
-    *   Once selected, `M` → _At Center_, snaps all corners of the selected UV into a single spot, guarenteeing  a solid color when moved over a palette square.
+    *   Once selected, `M` → _At Center_, snaps all corners of the selected UV into a single spot, guarenteeing  a solid color when moved over a palette square. `G` is the shortcut for the move tool, to move selected vertices (it's the same in UV Editing and 3D editing).
 5. Repeat for all the faces of the model to their desired color square, until your model is fully "textured".
+ 
+<details> <summary> Click Here for a Video Demonstration</summary> <div align="center"> <video src="https://user-images.githubusercontent.com/127040488/227807941-d851d6af-4e20-49ae-953c-6d114fa63882.mp4"></div></details>
+ 
+### Step 5 — Weights and Rigging the Model
+ 
+**This is the most important step of the process.** At this point, let's assume you've got your model ready and the skeleton prepared. It's time to bind, or _parent_, the mesh objects to the skeleton.
+
+Important terms for Rigging/Weight Painting:
+*   _Vertex_ - An individual point, or corner, of the model. Every model is essentially a collection of vertices that are connected into _faces_ a.k.a. polygons.
+*   _Edge_ - Two connected vertices.
+*   _Face_ - Three or more connected edges that make up a flat plane. Three connected edges are typically referred to as a _tri_, four edges are a _quad_, and four or more are called _ngons_. Ngons should be avoided in character modeling, opt for tris and quads.
+*   _Vertex Group_ - A collection that refers to specific vertices. 
+      *   In rigging, this is how you tell games and 3D software which bones affect specific parts of the model. 
+          *   This is achieved by naming the vertex group after the bone. 
+          *   SSBM character skeletons have bones typically named something like `JOBJ_0` or `JOBJ_32`. 
+      *   For example, the left shoulder bone is `JOBJ_30`, we would select all the vertices of the shoulder and assign them to a vertex group also named _JOBJ_30_
+*   _Vertex Weights_ - A single vertex can, and will, be a part of any number of vertex groups. Weights are a decimal value from `0.0 – 1.0` that determine how much a bone _influences_ a vertices' movement.
+      *   For example, say Vertex A is assigned to _Bone A_ with a weight of `.65`, and _Bone B_ with a weight of `.35`. When the skeleton is animated, _Bone A_ will influence the movement of the vertex more than _Bone B_. This is obvious in places like knees or elbows, where deformation is plain to see.
+      *   The total weight of a vertex _can_ surpass a value of `1.0` (i.e. Bone A → `.75` & Bone B → `.40` total to `1.15`), however, in Melee weights **cannot surpass a total value of `1.0`**. They need to be _normalized_.
+*   _Normalize_ - The process of taking the weights of a vertex and proportionally making them total to `1.0`. Lucky for us, Blender has a built-in function for normalizing selected vertices.
+      *   For example, if _Bone A_ has a weight of `1.0` and _Bone B_ has a weight of `3.0`, normalizing will result in _Bone A_ having a weight of `.25` and _Bone B_ `.75`, totalling `1.0`. **This is very important to prevent crashes and visual glitches in your character mod**.
+*   Zero Weights - A zero weight vertex is one that isn't assigned to any vertex group. **If any vertex on your model has a zero weight, the game will crash when loading it**.
+      *  **This means that every vertex needs to be assigned to a vertex group**. Not only that, but **every vertex, on every mesh, must be normalized**.
+  
+Now, onto rigging your model! There are three workflows I will briefly go over, each with their own pros and cons.
+1. Automatic Weights - When you parent an object to the skeleton, you're given the option to `Parent with Automatic Weights`— I _highly_ recommend avoiding this method. It oftentimes results in fast, inaccurate weights, and the clean-up of the weights will take longer than the time saved by doing it automatically.
+    *   This option is based on the skeleton's bones. Melee skeletons have a lot of redundant/useless bones that are never used, meaning this will weigh some vertices to useless bones, resulting in a glitchy mess.
 
 ---
+
 [^1]: I've linked Blender's LTS (Long Term Support) branch for its stability, but feel free to use the [latest available version](https://www.blender.org/download/).
 [^2]: It's a good practice to save the .dat and texture files together in their own labelled folder, and it's recommended to keep an unedited copy of your .dat and texture folder as a backup
 [^3]: By default, the imported `.dae` already comes broken down by material and is thus easier to manipulate and change without creating objects with too many assigned materials. The skeleton found in the `.dae` format is also incomplete and inaccurate and will result in crashes in-game, hence the inclusion of the `.smd` file.
