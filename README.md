@@ -4,6 +4,8 @@
 
 This tutorial focuses on the model-editing portion of creating a skin, ignoring things like character portraits or stock icons. It isn't fully comprehensive— there are gaps in our collective knowledge, so this tutorial will be a work in progress. With that in mind, let us begin.
 
+**I've included video demonstrations on each step, so do not be put off by the huge wall of text. Eventually I will add more visual aids.**
+
 ---
 
 ### Software and Resources
